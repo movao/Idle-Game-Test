@@ -11,7 +11,6 @@ namespace IdleEngine
     public class IdleEngine : MonoBehaviour
     {
         public Session Session;
-        public double Goal;
 
         string json;
         string json2;
@@ -24,36 +23,17 @@ namespace IdleEngine
         {
             generatorList = new List<Generatordata>();
             Session = GameObject.Find("Session").GetComponent<Session>();
-            Goal = 500000;
         }
 
         private void Update()
         {
-            if (Session.Money >= Goal)
-            {
-                Debug.Log("Herzlichen Glückwunsch! - Level erreicht!");
-                return;
-
-            }
-            /*
-            if (!Session)
-            {
-              return;
-            } */
-
             Session.Tick(Time.deltaTime);
         }
 
         private void OnEnable()
         {
-            if (!Session)
-            {
-                return;
-            }
-
             // ShaftManager.Instance.LoadShaftCost();
             Session.CalculateOfflineProgression();
-            //Session.Fill();
             Debug.Log("Load");
         }
 
@@ -73,19 +53,10 @@ namespace IdleEngine
 
         public void SaveGeneratorsJson()
         {
-
-            // Alle Generatoren durch TYP finden
-
             foreach (Generator gObject in Session.Generators)
-            {
-
-            // Daten in neue Liste schreiben
-            Debug.Log("Owned: " + gObject.Owned + " Position:  " + gObject.pos + " Multipliers: " + gObject.Multipliers);
-                
+            {   
             generator = new Generatordata(gObject.Owned, gObject.pos, gObject.Multipliers);
             generatorList.Add(generator);
-
-
             }
 
             Debug.Log("Generators: " + generatorList);
@@ -100,7 +71,6 @@ namespace IdleEngine
 
         public void SaveGeneralJson()
         {
-            
             general = new Generaldata(Session.Money, Session.Level, Session.LastTicks);
 
             json2 = JsonUtility.ToJson(general);
