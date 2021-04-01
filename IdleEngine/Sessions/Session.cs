@@ -10,18 +10,14 @@ namespace IdleEngine.Sessions
 {
   public class Session : MonoBehaviour
   {
-    // public Generator[] Generators;
     [SerializeField] public List<Generator> Generators;
     public double Money;
     public long LastTicks;
     public int Level;
 
-
-        // private List<Generator> instanciatedObjects;
-
-        private void Start()
+    private void Start()
     {
-            Level = 1;
+        Level = 1;
     }
 
     public void Tick(float deltaTimeInSeconds)
@@ -56,20 +52,7 @@ namespace IdleEngine.Sessions
     {
         LastTicks = DateTime.UtcNow.Ticks;
     }
-
-        /*
-        public void Fill()
-        {
-
-            instanciatedObjects = new List<Generator>();
-            for (int i = 0; i < Generators.Count; i++)
-            {
-                instanciatedObjects.Add(Instantiate(Generators[i]) as Generator);
-
-            }
-        */
-
-
+       
         }
 
     }
